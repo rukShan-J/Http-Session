@@ -6,6 +6,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class AddServlet extends HttpServlet {
 
@@ -18,8 +19,14 @@ public class AddServlet extends HttpServlet {
         
         int addition = i + j;
         
-        res.sendRedirect("SqServlet?k="+addition);
+//        res.sendRedirect("SqServlet?k="+addition);
 
+        //send addition value to SqServlet via a session
+        HttpSession session = req.getSession();     //session start
+        session.setAttribute("addition_key", addition);           //send value
+
+        
+        res.sendRedirect("SqServlet");
         
     }
 
