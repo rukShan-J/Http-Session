@@ -3,10 +3,11 @@ package MyPackage;
 
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+//import jakarta.servlet.http.HttpSession;
 
 public class AddServlet extends HttpServlet {
 
@@ -21,10 +22,13 @@ public class AddServlet extends HttpServlet {
         
 //        res.sendRedirect("SqServlet?k="+addition);
 
-        //send addition value to SqServlet via a session
-        HttpSession session = req.getSession();     //session start
-        session.setAttribute("addition_key", addition);           //send value
+//        //send addition value to SqServlet via a session
+//        HttpSession session = req.getSession();     //session start
+//        session.setAttribute("addition_key", addition);           //send value
 
+                                    //name          value(We can't in int. We want to convert it to String. To do that we append "" to the value)
+        Cookie cookie = new Cookie("additionCookie", addition + "");
+        res.addCookie(cookie);
         
         res.sendRedirect("SqServlet");
         
